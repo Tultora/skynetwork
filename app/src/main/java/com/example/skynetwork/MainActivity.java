@@ -4,17 +4,29 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
+import android.telephony.CellInfo;
+import android.telephony.CellInfoCdma;
+import android.telephony.CellInfoGsm;
+import android.telephony.CellInfoLte;
+import android.telephony.CellSignalStrengthCdma;
+import android.telephony.CellSignalStrengthGsm;
+import android.telephony.CellSignalStrengthLte;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private final static String LTE_TAG = "LTE_Tag";
     private final static String LTE_SIGNAL_STRENGTH = "getLteSignalStrength";
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         getSimInfo();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     private void getSimInfo() {
         /**
          * <uses-permission android:name="android.permission.READ_PHONE_STATE"
@@ -109,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         try {
             if (cm.getActiveNetworkInfo().getTypeName().equals("MOBILE"))
-                network = "Cell Network/3G";
+                network = "Cell Network/3G/LTE";
             else if (cm.getActiveNetworkInfo().getTypeName().equals("WIFI"))
                 network = "WiFi";
             else
@@ -127,10 +141,61 @@ public class MainActivity extends AppCompatActivity {
         lac.setText(Integer.toString(gc.getLac()));
         psc.setText(Integer.toString(gc.getPsc()));
 
-        String ssignal = String.valueOf(signalStrength);
-        String[] parts = ssignal.split(" ");
-        System.out.println("dbm = " + ssignal);
-        int dbm = 0;
+//        String ssignal = String.valueOf(signalStrength);
+//        String[] parts = ssignal.split(" ");
+//        int dbm = 0;
+        int ssignal = 0;
+        try {
+            final TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+            for (final CellInfo info : tm.getAllCellInfo()) {
+                if (info instanceof CellInfoGsm) {
+                    final CellSignalStrengthGsm gsm = ((CellInfoGsm) info).getCellSignalStrength();
+                    // do what you need
+//                    CellInfoGsm cellInfoGsm = (CellInfoGsm) telephonyManager.getAllCellInfo().get(0);
+//        CellSignalStrengthGsm cellSignalStrengthGsm = cellInfoGsm.getCellSignalStrength();
+//                    ssignal = gsm.getDbm();
+                    int getrssi = gsm.getRssi();
+                    rssi.setText(String.valueOf(getrssi));
+
+                    System.out.println("ssignal gsm = " + ssignal);
+
+                } else if (info instanceof CellInfoCdma) {
+                    final CellSignalStrengthCdma cdma = ((CellInfoCdma) info).getCellSignalStrength();
+                    // do what you need
+                    ssignal = cdma.getDbm();
+                    System.out.println("ssignal cdma= " + ssignal);
+                } else if (info instanceof CellInfoLte) {
+                    CellInfoLte cellInfoLte = (CellInfoLte) telephonyManager.getAllCellInfo().get(0);
+                    int getrsrp = cellInfoLte.getCellSignalStrength().getRsrp();
+                    int getrsrq = cellInfoLte.getCellSignalStrength().getRsrq();
+                    int getrssnr = cellInfoLte.getCellSignalStrength().getRssnr();
+                    rsp.setText(String.valueOf(getrsrp));
+                    rsrq.setText(String.valueOf(getrsrq));
+                    snr.setText(String.valueOf(getrssnr));
+                    int getCqi = cellInfoLte.getCellSignalStrength().getCqi();
+                    int getRssi = cellInfoLte.getCellSignalStrength().getRssi();
+                    cqi.setText(String.valueOf(getCqi));
+                    rssi.setText(String.valueOf(getRssi));
+                } else {
+                    throw new Exception("Unknown type of cell signal!");
+                }
+            }
+        } catch (Exception e) {
+//            Log.e(TAg, "Unable to obtain cell signal information", e);
+        }
+
+        ConnectivityManager cam = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cam.getActiveNetworkInfo();
+
+        //should check null because in airplane mode it will be null
+//        NetworkCapabilities nc = cam.getNetworkCapabilities(cm.getActiveNetwork());
+//        int downSpeed = nc.getLinkDownstreamBandwidthKbps();
+//        int upSpeed = nc.getLinkUpstreamBandwidthKbps();
+//        ulSpeed.setText(String.valueOf(upSpeed));
+//        dlSpeed.setText(String.valueOf(downSpeed));
+//        CellInfoGsm cellInfoGsm = (CellInfoGsm) telephonyManager.getAllCellInfo().get(0);
+//        CellSignalStrengthGsm cellSignalStrengthGsm = cellInfoGsm.getCellSignalStrength();
+//        int ssignal = cellSignalStrengthGsm.getDbm();
 
 //        if (telephonyManager.getNetworkType() == TelephonyManager.NETWORK_TYPE_LTE) {
 //            // For Lte SignalStrength: dbm = ASU - 140.
@@ -159,20 +224,5 @@ public class MainActivity extends AppCompatActivity {
 //                + "Network OperatorId : " + networkOperatorId + "\n"
 //                + "Network Name : " + networkName + "\n" + "Network Type : "
 //                + networkType;
-    }
-
-    private void getLTEsignalStrength() {
-        try {
-            Method[] methods = android.telephony.SignalStrength.class.getMethods();
-            for (Method mthd : methods) {
-                if (mthd.getName().equals(LTE_SIGNAL_STRENGTH)) {
-                    int LTEsignalStrength = (Integer) mthd.invoke(signalStrength, new Object[]{});
-                    Log.i(LTE_TAG, "signalStrength = " + LTEsignalStrength);
-                    return;
-                }
-            }
-        } catch (Exception e) {
-            Log.e(LTE_TAG, "Exception: " + e.toString());
-        }
     }
 }
