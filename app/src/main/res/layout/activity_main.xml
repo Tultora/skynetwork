@@ -20,13 +20,14 @@
                 android:id="@+id/backBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/outline_arrow_back_black_24" />
+                android:src="@drawable/outline_arrow_back_black_24"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Stack 1"
+                android:text="Stack"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
         </Toolbar>
@@ -49,6 +50,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/bandContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -75,11 +77,46 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/bandView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/bandWidthContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="BandWidth"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/bandWidth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="---"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/bandWidthView"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/mccContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -106,11 +143,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/mccView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/mncContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -137,42 +176,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/mncView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:gravity="left"
-                    android:text="LAC"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/lac"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="---"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/black" />
-
-            <LinearLayout
+                android:id="@+id/systemtypeContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -199,11 +209,79 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/systemtypeView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/lacContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="LAC"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/lac"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="---"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/lacView"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/tacContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="TAC"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tac"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="---"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/tacView"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/rncContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -230,11 +308,46 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/rncView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/enbContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="eNB"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/enb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="---"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/enbView"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/cidContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -261,11 +374,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/cidView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/pcsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -292,11 +407,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/pscView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/pciContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -308,7 +425,40 @@
                     android:layout_gravity="left"
                     android:layout_weight="1"
                     android:gravity="left"
-                    android:text="Frequency Number"
+                    android:text="PCI"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/pci"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="---"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/pciView"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/fre3gContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="Frequency (UARFCN)"
                     android:textSize="12sp" />
 
                 <TextView
@@ -323,11 +473,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/fre3gView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/fre4gContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -339,11 +491,11 @@
                     android:layout_gravity="left"
                     android:layout_weight="1"
                     android:gravity="left"
-                    android:text="RSP"
+                    android:text="Frequency (EARFCN)"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/rsp"
+                    android:id="@+id/frequency4g"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
@@ -354,11 +506,112 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/fre4gView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/taContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="TA"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/ta"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="---"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/taView"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/rscpContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="RSCP"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/rscp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="---"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/rscpView"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/rsrpContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="RSRP"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/rsrp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="---"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/rsrpView"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/rsrqContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -385,11 +638,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/rsrqView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/snrContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -416,11 +671,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/snrView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/cqiContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -447,11 +704,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/cqiView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
 
             <LinearLayout
+                android:id="@+id/rssiContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -478,6 +737,73 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/rssiView"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/ecnoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="ECNO"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/ecno"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="---"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/ecnoView"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/txpwrContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="TX PWR"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txPwr"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="---"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/txpwrView"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/black" />
